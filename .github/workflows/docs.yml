@@ -9,15 +9,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy-documentation-to-gh-pages:
+  build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v5
-      - name: install deps
-        run: poetry install --with docs
-      - uses: mhausenblas/mkdocs-deploy-gh-pages@master
-        name: Deploy docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python install
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Poetry setup
+        uses: Gr1N/setup-poetry@v9
+      - run: poetry install --with=docs
+        name: Poetry install (with docs)
+      - name: Mkdocs build
+        run: mkdocs build
+      - name: Upload artifact to github pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site'
+
+  deploy:
+    runs-on: ubuntu-latest
+    # if: github.ref_type == 'tag'
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
