@@ -1,0 +1,3 @@
+# Gitlab
+
+::: forges.gitlab

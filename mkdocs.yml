@@ -1,0 +1,26 @@
+site_name: West DevOps Mass Driver Plugins Documentation
+repo_url: https://github.com/West-DevOps/mass-driver-plugins
+repo_name: West-DevOps/mass-driver-plugins
+theme:
+  name: material
+  features:
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+  palette:
+    scheme: slate
+    primary: indigo
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        paths: ['src']
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/ben-west/
+    - icon: fontawesome/brands/github
+      link: https://github.com/West-DevOps
