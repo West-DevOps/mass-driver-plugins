@@ -1,19 +1,9 @@
 """Module for interacting with gitlab"""
 import json
-import re
-from enum import Enum
+import logging
 
 from src.tools.http import GITLAB_CLIENT
-from mass_driver.models.repository import Source, IndexedRepos
-
-
-REQ_OPTS = "pagination=keyset&order_by=id&simple=true&per_page=100"
-"""Default request options"""
-
-
-class CloneMode(Enum):
-    HTTP = 'http'
-    SSH = 'ssh'
+from mass_driver.models.repository import Source, IndexedRepos, SourcedRepo
 
 
 class GitLabSearch(Source):
@@ -25,8 +15,11 @@ class GitLabSearch(Source):
     search_query: str
     """Query to search with"""
 
-    clone_mode: CloneMode
+    clone_mode: str = "ssh"
     """Return HTTP or SSH clone links?"""
+
+    request_opts: str = "simple=true&per_page=100"
+    """Additional request options for gitlab API /projects endpoint"""
 
 
     def get_repos(self, repos: list, pag=None) -> None:
@@ -38,7 +31,9 @@ class GitLabSearch(Source):
         Returns:
             None - appends to `repos` parameter
         """
-        response = GITLAB_CLIENT.get(pag or f"{self.api_root}/projects?{REQ_OPTS}&search={self.search_query}")
+        response = GITLAB_CLIENT.get(pag or f"{self.api_root}/projects"
+                                            f"?search={self.search_query}&pagination=keyset&order_by=id&"
+                                            f"{self.request_opts}")
 
         for repo in json.loads(response.text):
             repos.append(repo)
@@ -46,7 +41,7 @@ class GitLabSearch(Source):
         try:
             self.get_repos(repos, response.headers['link'].strip('<').split('>')[0])
         except KeyError as ke:
-            print(f"No {ke} in response headers, Gitlab repo pull complete")
+            logging.debug(f"No {ke} in response headers, Gitlab repo pull complete")
 
 
     def discover(self) -> IndexedRepos:
@@ -61,9 +56,14 @@ class GitLabSearch(Source):
         gitlab_repos = []
         self.get_repos(gitlab_repos)
 
-        regex = re.compile(self.base)
+        logging.info(f"Retrieved {len(gitlab_repos)} repos from gitlab.")
 
         for repo in gitlab_repos:
-            print(repo)
+            repos.update({repo['name']: SourcedRepo(
+                clone_url=(repo['http_url_to_repo'] if self.clone_mode == 'http' else repo['ssh_url_to_repo']),
+                repo_id=repo['name'],
+                force_pull=True,
+                patch_data=repo
+            )})
 
         return repos

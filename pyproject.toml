@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mass-driver-plugins"
-version = "0.0.1"
+version = "0.0.2"
 description = "Plugins for mass driver"
 authors = ["Ben West <ben.west.500@gmail.com>"]
 license = "GNU GPL v3"
@@ -18,10 +18,21 @@ httpx = "^0.28.1"
 mkdocs-material = "^9.5.49"
 mkdocstrings-python = "^1.13.0"
 
-
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins.'massdriver.sources']
+gitlab-search = 'src.sources.gitlab:GitLabSearch'
+
+[tool.poetry.plugins.'massdriver.drivers']
+newlines = 'src.drivers.newlines:NewLineDriver'
+
+[tool.poetry.plugins.'massdriver.forges']
+gitlab = 'src.forges.gitlab:GitLab'
+
+#[tool.poetry.plugins.'massdriver.scanners']
+#gitlab = 'src.scanners.dark:ScannerDarkly'

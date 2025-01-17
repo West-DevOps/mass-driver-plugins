@@ -1,0 +1,30 @@
+[mass-driver.source]
+source_name = "gitlab-search"
+
+[mass-driver.source.source_config]
+api_root = "https://gitlab.com/api/v4"
+search_query = "inkscape+plugin"
+clone_mode = "ssh" # or "https"
+
+[mass-driver.migration]
+commit_message = """Example commit"""
+commit_author_name = "John Smith"
+commit_author_email = "smith@example.com"
+
+branch_name = "feat/example-newlines"
+driver_name = "newlines"
+# Mass driver be wierd, you get a pydantic validation error is this is not here, even when it's empty and the driver
+# doesn't require any config...
+driver_config = {}
+
+
+#[mass-driver.forge]
+#forge_name = "gitlab"
+#base_branch = "main"
+#head_branch = "feat/example-newlines"
+#draft_pr = false
+#pr_title = "Adds newlines to files that need one"
+#pr_body = """Example PR Body"""
+#
+## Do you need to git push the branch before PR?
+#git_push_first = true
