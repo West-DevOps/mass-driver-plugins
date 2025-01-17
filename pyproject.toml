@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mass-driver-plugins"
+version = "0.0.1"
+description = "Plugins for mass driver"
+authors = ["Ben West <ben.west.500@gmail.com>"]
+license = "GNU GPL v3"
+readme = "README.md"
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+mass-driver = { git = 'git@github.com:w3s7y/mass-driver.git' }
+httpx = "^0.28.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
