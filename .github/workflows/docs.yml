@@ -26,12 +26,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Setup Poetry
-        uses: Gr1N/setup-poetry@v9
+      - name: Run poetry image
+        uses: abatilo/actions-poetry@v2
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - run: poetry config virtualenvs.in-project true
-        name: venv in project
       - run: poetry install --with=docs
         name: Poetry install
       - run: mkdocs build
