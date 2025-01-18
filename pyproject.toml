@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mass-driver-plugins"
-version = "0.0.2"
+version = "0.0.3"
 description = "Plugins for mass driver"
 authors = ["Ben West <ben.west.500@gmail.com>"]
 license = "GNU GPL v3"
