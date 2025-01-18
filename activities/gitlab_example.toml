@@ -7,7 +7,7 @@ search_query = "inkscape+plugin"
 clone_mode = "ssh" # or "https"
 
 [mass-driver.migration]
-commit_message = """Example commit"""
+commit_message = """Adding empty newlines to files without one at EOF marker."""
 commit_author_name = "John Smith"
 commit_author_email = "smith@example.com"
 
@@ -18,13 +18,13 @@ driver_name = "newlines"
 driver_config = {}
 
 
-#[mass-driver.forge]
-#forge_name = "gitlab"
-#base_branch = "main"
-#head_branch = "feat/example-newlines"
-#draft_pr = false
-#pr_title = "Adds newlines to files that need one"
-#pr_body = """Example PR Body"""
-#
-## Do you need to git push the branch before PR?
-#git_push_first = true
+[mass-driver.forge]
+forge_name = "gitlab"
+base_branch = "main"
+head_branch = "feat/example-newlines"
+draft_pr = false
+pr_title = "Adds newlines to files that need one"
+pr_body = """Example PR Body"""
+
+# Do you need to git push the branch before PR?
+git_push_first = true
