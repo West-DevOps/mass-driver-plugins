@@ -11,15 +11,20 @@ supports `https` cloning of repos (as well as a few other improvements which are
 poetry install --with docs --with test
 # Go make a PAT token on gitlab.com with API read access. 
 export GITLAB_TOKEN=<your token>
-mass-driver run activities/gitlab_example.toml
+poetry run mass-driver run activities/gitlab_example.toml
 ```
 
 ## Documentation 
 
 The official (JB Approved) [mass-driver](https://jiby.tech/mass-driver/) has its own docs.
 
+We have the documentation [here](https://west-devops.github.io/mass-driver-plugins/) for these plugins. 
+
+### Hosting locally
+
+Want to check the docs after an update but can't be bothered to get a merge onto `main`?... 
+
 ```shell
-mkdocs serve
+mkdocs serve -w src # Watch the src folder for updates (automatically watches docs and mkdocs.yml files).
 # Docs are now available from http://127.0.0.1:8000/
 ```
-
