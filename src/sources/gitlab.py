@@ -9,17 +9,14 @@ from mass_driver.models.repository import Source, IndexedRepos, SourcedRepo
 class GitLabSearch(Source):
     """Class for performing basic search for repos.  Also, gitlabs search function SUCKS so YMMV..."""
 
-    api_root: str
-    """API Root for your Gitlab instance"""
-
     search_query: str
     """Query to search with"""
 
+    api_root: str = "https://gitlab.com/api/v4"
+    """API Root for your Gitlab instance"""
+
     clone_mode: str = "ssh"
     """Return HTTP or SSH clone links?"""
-
-    request_opts: str = "simple=true&per_page=100"
-    """Additional request options for gitlab API /projects endpoint"""
 
 
     def get_repos(self, repos: list, pag=None) -> None:
@@ -33,7 +30,7 @@ class GitLabSearch(Source):
         """
         response = GITLAB_CLIENT.get(pag or f"{self.api_root}/projects"
                                             f"?search={self.search_query}&pagination=keyset&order_by=id&"
-                                            f"{self.request_opts}")
+                                            "simple=true&per_page=100")
 
         for repo in json.loads(response.text):
             repos.append(repo)
@@ -55,8 +52,6 @@ class GitLabSearch(Source):
 
         gitlab_repos = []
         self.get_repos(gitlab_repos)
-
-        logging.info(f"Retrieved {len(gitlab_repos)} repos from gitlab.")
 
         for repo in gitlab_repos:
             repos.update({repo['name']: SourcedRepo(

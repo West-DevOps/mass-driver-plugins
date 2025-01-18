@@ -36,7 +36,7 @@ class NewLineDriver(PatchDriver):
                     try:
                         content = reader.read()
                     except UnicodeDecodeError as e:
-                        logging.error(f"{e} caught working on file {full_path}")
+                        logging.debug(f"{e} caught working on file {full_path} (it's not a regular text file)")
                         failed_reads += 1
                         continue
 

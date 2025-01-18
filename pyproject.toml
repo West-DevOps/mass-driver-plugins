@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mass-driver-plugins"
-version = "0.0.3"
+version = "0.0.4"
 description = "Plugins for mass driver"
 authors = ["Ben West <ben.west.500@gmail.com>"]
 license = "GNU GPL v3"
@@ -20,6 +20,7 @@ mkdocstrings-python = "^1.13.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
+pytest-mock = "^3.14.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -34,5 +35,5 @@ newlines = 'src.drivers.newlines:NewLineDriver'
 [tool.poetry.plugins.'massdriver.forges']
 gitlab = 'src.forges.gitlab:GitLab'
 
-#[tool.poetry.plugins.'massdriver.scanners']
-#gitlab = 'src.scanners.dark:ScannerDarkly'
+[tool.poetry.plugins.'massdriver.scanners']
+gitlab = 'src.scanners.dark:ScannerDarkly'

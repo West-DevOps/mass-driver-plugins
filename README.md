@@ -16,9 +16,9 @@ poetry run mass-driver run activities/gitlab_example.toml
 
 ## Documentation 
 
-The official (JB Approved) [mass-driver](https://jiby.tech/mass-driver/) has its own docs.
+The official `mass-driver` has its own [docs](https://jiby.tech/mass-driver/).
 
-We have the documentation [here](https://west-devops.github.io/mass-driver-plugins/) for these plugins. 
+We have the [documentation here](https://west-devops.github.io/mass-driver-plugins/) for these plugins. 
 
 ### Hosting locally
 

@@ -2,12 +2,20 @@
 source_name = "gitlab-search"
 
 [mass-driver.source.source_config]
+# Hopefully self-explanatory, the gitlab you want to talk to! (optional, defaults to what you see below).
 api_root = "https://gitlab.com/api/v4"
-search_query = "inkscape+plugin"
-clone_mode = "ssh" # or "https"
+
+# Return list of projects with a path, name, or description matching the search criteria (case-insensitive, substring match).
+# Multiple terms can be provided, separated by an escaped space, either + or %20, and will be ANDed together.
+search_query = "anhydrous+laurel" # This returns just my personal test repo with some empty newlines ready to run on.
+
+# When the list of IndexedRepos comes back from the source, will it have 'ssh' or the 'https' clone URLs?
+# ssh is the default so this is optional.
+clone_mode = "ssh"
+
 
 [mass-driver.migration]
-commit_message = """Adding empty newlines to files without one at EOF marker."""
+commit_message = "fix: newlines"
 commit_author_name = "John Smith"
 commit_author_email = "smith@example.com"
 
@@ -17,7 +25,7 @@ driver_name = "newlines"
 # doesn't require any config...
 driver_config = {}
 
-
+#
 #[mass-driver.forge]
 #forge_name = "gitlab"
 #base_branch = "main"
