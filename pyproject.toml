@@ -11,11 +11,11 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.13"
-mass-driver = { git = 'git@github.com:w3s7y/mass-driver.git' }
+mass-driver = { git = 'https://github.com/w3s7y/mass-driver.git' }
 httpx = "^0.28.1"
 
 [tool.poetry.group.docs.dependencies]
-mkdocs-material = "^9.5.49"
+mkdocs-material = "^9.5.50"
 mkdocstrings-python = "^1.13.0"
 
 [tool.poetry.group.test.dependencies]
