@@ -1,7 +1,6 @@
 name: Docs
 on:
   push:
-    branches: ["main"]
   workflow_dispatch:
 
 concurrency:
@@ -39,7 +38,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    if: github.ref_type == 'tag'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
