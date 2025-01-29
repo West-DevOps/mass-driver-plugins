@@ -8,22 +8,25 @@ api_root = "https://gitlab.com/api/v4"
 # Return list of projects with a path, name, or description matching the search criteria (case-insensitive, substring match).
 # Multiple terms can be provided, separated by an escaped space, either + or %20, and will be ANDed together.
 search_query = "anhydrous+laurel" # This returns just my personal test repo with some empty newlines ready to run on.
+# search_query = "inkscape+plugins" # This returns about 8 repos.
 
 # When the list of IndexedRepos comes back from the source, will it have 'ssh' or the 'https' clone URLs?
 # ssh is the default so this is optional.
 clone_mode = "ssh"
 
+[mass-driver.scan]
+scanner_names = ["node-pkgs"]
 
-[mass-driver.migration]
-commit_message = "fix: newlines"
-commit_author_name = "John Smith"
-commit_author_email = "smith@example.com"
-
-branch_name = "feat/example-newlines"
-driver_name = "newlines"
-# Mass driver be wierd, you get a pydantic validation error is this is not here, even when it's empty and the driver
-# doesn't require any config...
-driver_config = {}
+#[mass-driver.migration]
+#commit_message = "fix: newlines"
+#commit_author_name = "John Smith"
+#commit_author_email = "smith@example.com"
+#
+#branch_name = "feat/example-newlines"
+#driver_name = "newlines"
+## Mass driver be wierd, you get a pydantic validation error is this is not here, even when it's empty and the driver
+## doesn't require any config...
+#driver_config = {}
 
 #
 #[mass-driver.forge]

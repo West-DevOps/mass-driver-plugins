@@ -37,3 +37,4 @@ gitlab = 'src.forges.gitlab:GitLab'
 
 [tool.poetry.plugins.'massdriver.scanners']
 gitlab = 'src.scanners.dark:ScannerDarkly'
+node-pkgs = 'src.scanners.test:get_org_node_pkgs'
