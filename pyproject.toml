@@ -11,7 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.13"
-mass-driver = { git = 'https://github.com/w3s7y/mass-driver.git' }
+mass-driver = { git = 'https://github.com/w3s7y/mass-driver.git@feat/thread-runs-only' }
 httpx = "^0.28.1"
 
 [tool.poetry.group.docs.dependencies]
